@@ -1,10 +1,9 @@
 package main
 
 import (
-	"context"
+	_ "github.com/NamanZelawat/go_test_api/internal/app/api"
 )
 
 func main() {
-	ctx := context.Background()
 
 }

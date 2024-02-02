@@ -1,0 +1,8 @@
+services:
+  api:
+    build:
+      context: ../
+      dockerfile: ./deployments/api/Dockerfile
+    hostname: api
+    ports:
+      - "8080:8080"

@@ -1,2 +1,5 @@
 api:
-	docker-compose -f deployments/docker-compose.yml up -d api mysql
+	docker-compose --verbose -f deployments/docker-compose.yml up -d --build api mysql
+
+mysql:
+	docker-compose --verbose -f deployments/docker-compose.yml up -d mysql

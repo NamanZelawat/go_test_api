@@ -3,3 +3,6 @@ api:
 
 mysql:
 	docker-compose --verbose -f deployments/docker-compose.yml up -d mysql
+
+proto_files:
+	buf generate

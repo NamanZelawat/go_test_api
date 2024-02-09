@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-option go_package = "github.com/NamanZelawat/go_test_api/";
+option go_package = "github.com/NamanZelawat/go_test_api/api";
 
 package image;
 
-import "google/api/annotations.proto";
+import "proto/google/annotations.proto";
 
 
 service Greeter {

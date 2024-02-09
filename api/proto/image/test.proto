@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-option go_package = "github.com/NamanZelawat/go_test_api/test";
+option go_package = "github.com/NamanZelawat/go_test_api/";
 
-package test;
+package image;
 
 service Greeter {
     rpc SayHello (HelloRequest) returns (HelloReply) {}

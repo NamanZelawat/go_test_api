@@ -1,2 +1,3 @@
 deployments/volumes/mysql/data
 vendor
+.idea

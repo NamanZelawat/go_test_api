@@ -13,3 +13,7 @@ plugins:
   - plugin: grpc-gateway
     out: .
     opt: paths=source_relative
+  - plugin: buf.build/grpc/python:v1.61.0
+    out: .
+  - plugin: buf.build/protocolbuffers/python
+    out: .

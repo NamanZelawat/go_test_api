@@ -4,28 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26d4c903-bf62-4b2e-a1f4-ef24b6356c6c" name="Changes" comment="IDE files.">
-      <change afterPath="$PROJECT_DIR$/cmd/ingress/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/app/ingress/ingress.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="26d4c903-bf62-4b2e-a1f4-ef24b6356c6c" name="Changes" comment="Proto files and buf work file.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buf.gen.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/buf.gen.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/model/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/model/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/app/api/handler/health.go" beforeDir="false" afterPath="$PROJECT_DIR$/buf.work.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/app/model/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/model/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/google/annotations.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/google/annotations.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/google/annotations.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/google/annotations_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/google/annotations_pb2_grpc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/google/http.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/google/http_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/google/http_pb2_grpc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/image/test.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/image/test.pb.gw.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/image/test.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/image/test.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/image/test_grpc.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/image/test_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/image/test_pb2_grpc.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,12 +111,21 @@
       <option name="project" value="LOCAL" />
       <updated>1707482301716</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Proto files and buf work file.">
+      <option name="closed" value="true" />
+      <created>1707652913647</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1707652913647</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added python." />
     <MESSAGE value="IDE files." />
-    <option name="LAST_COMMIT_MESSAGE" value="IDE files." />
+    <MESSAGE value="Proto files and buf work file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Proto files and buf work file." />
   </component>
 </project>

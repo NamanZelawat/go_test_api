@@ -5,15 +5,15 @@ managed:
     default: github.com/NamanZelawat/go_test_api/
 plugins:
   - plugin: go
-    out: .
+    out: proto
     opt: paths=source_relative
   - plugin: go-grpc
-    out: .
+    out: proto
     opt: paths=source_relative,require_unimplemented_servers=false
   - plugin: grpc-gateway
-    out: .
+    out: proto
     opt: paths=source_relative
   - plugin: buf.build/grpc/python:v1.61.0
-    out: .
+    out: proto
   - plugin: buf.build/protocolbuffers/python
-    out: .
+    out: proto

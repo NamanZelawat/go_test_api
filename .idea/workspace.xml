@@ -5,14 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d4c903-bf62-4b2e-a1f4-ef24b6356c6c" name="Changes" comment="IDE files.">
-      <change afterPath="$PROJECT_DIR$/deployments/model/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/ingress/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/app/ingress/ingress.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buf.gen.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/buf.gen.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/model/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/model/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/api/handler/health.go" beforeDir="false" afterPath="$PROJECT_DIR$/buf.work.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/model/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/model/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/annotations.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/annotations.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/google/annotations.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/annotations_pb2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/annotations_pb2_grpc.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/http.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/http_pb2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/http_pb2_grpc.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/image/test.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/image/test.pb.gw.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/image/test.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/image/test.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/image/test_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/image/test_pb2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/image/test_pb2_grpc.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,9 +61,14 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/zelaw/go/src/github.com/NamanZelawat/go_test_api",
-    "settings.editor.selected.configurable": "vcs.Git"
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zelaw\go\src\github.com\NamanZelawat\go_test_api\internal\app\model" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="proto" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
       <makefile filename="$PROJECT_DIR$/Makefile" target="proto" workingDirectory="" arguments="">
@@ -92,7 +122,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707481910728</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="IDE files.">
+      <option name="closed" value="true" />
+      <created>1707482301716</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1707482301716</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

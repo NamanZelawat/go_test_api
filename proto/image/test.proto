@@ -4,20 +4,20 @@ option go_package = "github.com/NamanZelawat/go_test_api/api";
 
 package image;
 
-import "proto/google/annotations.proto";
+import "google/annotations.proto";
 
 
 service Greeter {
     rpc SayHello (HelloRequest) returns (HelloReply) {
         option (google.api.http) = {
-            post: "/v1/example/echo"
+            post: "/image"
             body: "*"
         };
     }
 }
 
 message HelloRequest {
-    string name = 1;
+    bytes input_field = 1;
 }
 
 message HelloReply {

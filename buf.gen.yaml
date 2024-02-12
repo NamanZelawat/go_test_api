@@ -2,7 +2,7 @@ version: v1
 managed:
   enabled: true
   go_package_prefix:
-    default: github.com/NamanZelawat/go_test_api/
+    default: github.com/NamanZelawat/go_test_api/proto
 plugins:
   - plugin: go
     out: proto

@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26d4c903-bf62-4b2e-a1f4-ef24b6356c6c" name="Changes" comment="Proto files and buf work file.">
+    <list default="true" id="26d4c903-bf62-4b2e-a1f4-ef24b6356c6c" name="Changes" comment="Readme.">
+      <change afterPath="$PROJECT_DIR$/deployments/ingress/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buf.gen.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/buf.gen.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/api/api.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/ingress/ingress.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/ingress/ingress.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/annotations.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/google/annotations.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/annotations_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/google/annotations_pb2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/http.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/google/http.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/http_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/google/http_pb2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/image/test.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/image/test.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/image/test_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/image/test_pb2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,13 +128,22 @@
       <option name="project" value="LOCAL" />
       <updated>1707652913647</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Readme.">
+      <option name="closed" value="true" />
+      <created>1707653040586</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1707653040586</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added python." />
     <MESSAGE value="IDE files." />
     <MESSAGE value="Proto files and buf work file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Proto files and buf work file." />
+    <MESSAGE value="Readme." />
+    <option name="LAST_COMMIT_MESSAGE" value="Readme." />
   </component>
 </project>

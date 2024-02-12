@@ -16,12 +16,12 @@ from google import http_pb2 as google_dot_http__pb2
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18google/annotations.proto\x12\ngoogle.api\x1a\x11google/http.proto\x1a google/protobuf/descriptor.proto:K\n\x04http\x12\x1e.google.protobuf.MethodOptions\x18\xb0\xca\xbc\" \x01(\x0b\x32\x14.google.api.HttpRuleR\x04httpB\x97\x01\n\x0e\x63om.google.apiB\x10\x41nnotationsProtoP\x01Z*github.com/NamanZelawat/go_test_api/google\xa2\x02\x03GAX\xaa\x02\nGoogle.Api\xca\x02\nGoogle\\Api\xe2\x02\x16Google\\Api\\GPBMetadata\xea\x02\x0bGoogle::Apib\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18google/annotations.proto\x12\ngoogle.api\x1a\x11google/http.proto\x1a google/protobuf/descriptor.proto:K\n\x04http\x12\x1e.google.protobuf.MethodOptions\x18\xb0\xca\xbc\" \x01(\x0b\x32\x14.google.api.HttpRuleR\x04httpB\x9d\x01\n\x0e\x63om.google.apiB\x10\x41nnotationsProtoP\x01Z0github.com/NamanZelawat/go_test_api/proto/google\xa2\x02\x03GAX\xaa\x02\nGoogle.Api\xca\x02\nGoogle\\Api\xe2\x02\x16Google\\Api\\GPBMetadata\xea\x02\x0bGoogle::Apib\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'google.annotations_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\n\016com.google.apiB\020AnnotationsProtoP\001Z*github.com/NamanZelawat/go_test_api/google\242\002\003GAX\252\002\nGoogle.Api\312\002\nGoogle\\Api\342\002\026Google\\Api\\GPBMetadata\352\002\013Google::Api'
+  _globals['DESCRIPTOR']._serialized_options = b'\n\016com.google.apiB\020AnnotationsProtoP\001Z0github.com/NamanZelawat/go_test_api/proto/google\242\002\003GAX\252\002\nGoogle.Api\312\002\nGoogle\\Api\342\002\026Google\\Api\\GPBMetadata\352\002\013Google::Api'
 # @@protoc_insertion_point(module_scope)

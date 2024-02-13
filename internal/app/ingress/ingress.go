@@ -2,7 +2,6 @@ package ingress
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -10,15 +9,6 @@ import (
 
 	pb "github.com/NamanZelawat/go_test_api/proto/image"
 	"google.golang.org/grpc"
-)
-
-const (
-	defaultName = "world"
-)
-
-var (
-	addr = flag.String("addr", "localhost:8080", "the address to connect to")
-	name = flag.String("name", defaultName, "Name to greet")
 )
 
 func init() {
@@ -32,30 +22,14 @@ func init() {
 	// Attach the Greeter service to the server
 	pb.RegisterGreeterServer(s, &server{})
 	// Serve gRPC server
+
 	log.Println("Serving gRPC on 0.0.0.0:8080")
 
-	s.Serve(lis)
-	// go func() {
-	// 	log.Fatalln(s.Serve(lis))
-	// }()
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("failed to serve: %v", err)
+	}
 
-	// 	flag.Parse()
-	// 	// Set up a connection to the server.
-	// 	conn, err := grpc.Dial(*addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	// 	if err != nil {
-	// 		log.Fatalf("did not connect: %v", err)
-	// 	}
-	// 	defer conn.Close()
-	// 	c := pb.NewGreeterClient(conn)
-	//
-	// 	// Contact the server and print out its response.
-	// 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	// 	defer cancel()
-	// 	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: *name})
-	// 	if err != nil {
-	// 		log.Fatalf("could not greet: %v", err)
-	// 	}
-	// 	log.Printf("Greeting: %s", r.GetMessage())
+	log.Println("Serving gRPC on 0.0.0.0:8080")
 }
 
 type server struct {

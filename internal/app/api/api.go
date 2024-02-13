@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -17,17 +18,20 @@ import (
 func init() {
 	// Create a client connection to the gRPC server we just started
 	// This is where the gRPC-Gateway proxies the requests
-	conn, err := grpc.DialContext(
-		context.Background(),
-		"0.0.0.0:8080",
-		grpc.WithBlock(),
+	gwmux := runtime.NewServeMux()
+
+	log.Println("Starting to establish the grpc conn")
+	conn, err := grpc.Dial(
+		"ingress:8080",
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
-	if err != nil {
-		log.Fatalln("Failed to dial server:", err)
-	}
 
-	gwmux := runtime.NewServeMux()
+	defer conn.Close()
+
+	log.Println("Dialing done")
+	if err != nil {
+		log.Println("Failed to dial server:", err)
+	}
 
 	// Register Greeter
 	err = helloworldpb.RegisterGreeterHandler(context.Background(), gwmux, conn)
@@ -57,7 +61,6 @@ func serverThread(gwServer *http.Server, wg *sync.WaitGroup) {
 }
 
 func reqRegister(conn *grpc.ClientConn, gwmux *runtime.ServeMux) {
-
 	handleFileUpload := func(w http.ResponseWriter, r *http.Request, params map[string]string) {
 		log.Println("Calling the function")
 
@@ -90,6 +93,12 @@ func reqRegister(conn *grpc.ClientConn, gwmux *runtime.ServeMux) {
 		log.Printf("Greeting: %s", resp.GetMessage())
 
 		fmt.Println(filetype)
+
+		httpResp, err := json.Marshal(resp)
+		if err != nil {
+			log.Printf("Error, : %v", err)
+		}
+		w.Write(httpResp)
 	}
 
 	gwmux.HandlePath("POST", "/image", handleFileUpload)

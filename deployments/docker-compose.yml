@@ -3,6 +3,7 @@ services:
     build:
       context: ../
       dockerfile: ./deployments/api/Dockerfile
+    image: zelawat27/test_api
     hostname: api
     ports:
       - "8090:8090"
@@ -15,6 +16,7 @@ services:
     build:
       context: ../
       dockerfile: ./deployments/ingress/Dockerfile
+    image: zelawat27/test_ingress
     hostname: ingress
     networks:
       - api_net
@@ -37,6 +39,19 @@ services:
       - ./volumes/mysql/data:/var/lib/mysql
     networks:
       - api_net
-
+  minio:
+    hostname: minio
+    image: bitnami/minio:latest
+    environment:
+      MINIO_ROOT_USER: "root"
+      MINIO_ROOT_PASSWORD: "password"
+      MINIO_DEFAULT_BUCKETS: "image"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./volumes/minio/data:/bitnami/minio/data
+    networks:
+      - api_net
 networks:
   api_net:

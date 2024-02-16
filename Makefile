@@ -1,5 +1,5 @@
 app:
-	docker-compose --verbose -f deployments/docker-compose.yml up -d --build api ingress
+	docker-compose --verbose -f deployments/docker-compose.yml up -d --build api ingress minio
 
 api_cont:
 	docker-compose --verbose -f deployments/docker-compose.yml up -d --build api

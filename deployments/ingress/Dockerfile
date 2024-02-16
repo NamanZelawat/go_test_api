@@ -1,4 +1,4 @@
-FROM golang
+FROM golang:latest
 
 WORKDIR /app
 
@@ -6,6 +6,4 @@ COPY . .
 
 RUN go mod tidy
 
-RUN go build -o ingress cmd/ingress/main.go
-
-CMD ["./ingress"]
+CMD ["go", "run", "cmd/ingress/main.go"]

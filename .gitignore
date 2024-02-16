@@ -1,3 +1,4 @@
 deployments/volumes/mysql/data
+deployments/volumes/minio/data
 vendor
 .venv

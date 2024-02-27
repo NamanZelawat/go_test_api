@@ -4,12 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"sync"
 	"time"
 
-	helloworldpb "github.com/NamanZelawat/go_test_api/proto/image"
+	pb "github.com/NamanZelawat/go_test_api/proto/image"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -34,7 +35,7 @@ func init() {
 	}
 
 	// Register Greeter
-	err = helloworldpb.RegisterGreeterHandler(context.Background(), gwmux, conn)
+	err = pb.RegisterGreeterHandler(context.Background(), gwmux, conn)
 	if err != nil {
 		log.Fatalln("Failed to register gateway:", err)
 	}
@@ -73,20 +74,33 @@ func reqRegister(conn *grpc.ClientConn, gwmux *runtime.ServeMux) {
 
 		buff := make([]byte, 512)
 
-		_, err = f.Read(buff)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("failed to get 'attachment': %s", err.Error()), http.StatusBadRequest)
-			return
-		}
-
 		filetype := http.DetectContentType(buff)
 
-		c := helloworldpb.NewGreeterClient(conn)
+		c := pb.NewGreeterClient(conn)
 
 		// Contact the server and print out its response.
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 		defer cancel()
-		resp, err := c.SayHello(ctx, &helloworldpb.HelloRequest{InputField: buff})
+
+		stream, err := c.SayHello(ctx)
+
+		for {
+			bytesRead, err := f.Read(buff)
+			if err == io.EOF {
+				break
+			}
+			if err != nil {
+				log.Fatalf("error reading chunk from file: %v", err)
+			}
+
+			// Send the chunk to the server
+			err = stream.Send(&pb.HelloRequest{InputField: buff[:bytesRead]})
+			if err != nil {
+				log.Fatalf("error sending chunk to server: %v", err)
+			}
+		}
+
+		resp, err := stream.CloseAndRecv()
 		if err != nil {
 			log.Fatalf("could not greet: %v", err)
 		}

@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"io"
 	"log"
 	"os"
 
@@ -28,7 +29,7 @@ func CreateServer() *grpc.Server {
 	return s
 }
 
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+func (s *server) SayHello(stream pb.Greeter_SayHelloServer) error {
 	// filetype := http.DetectContentType(in.InputField)
 	// fmt.Println(filetype)
 
@@ -43,8 +44,16 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 		}
 	}()
 
-	if _, err := fo.Write(in.InputField); err != nil {
-		panic(err)
+	for {
+		chunk, err := stream.Recv()
+		if err == io.EOF {
+			stream.SendAndClose(&pb.HelloReply{Message: "I am the world"})
+			break
+		}
+
+		if _, err := fo.Write(chunk.InputField); err != nil {
+			panic(err)
+		}
 	}
 
 	s3Client, err := minio.New("minio:9000", &minio.Options{
@@ -60,7 +69,7 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 	}); err != nil {
 		log.Fatalln(err)
 	}
-	log.Println("Successfully uploaded my-filename.png")
+	log.Println("Successfully uploaded image")
 
-	return &pb.HelloReply{Message: "I am the world"}, nil
+	return nil
 }

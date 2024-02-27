@@ -14,7 +14,7 @@ class GreeterStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.SayHello = channel.unary_unary(
+        self.SayHello = channel.stream_unary(
                 '/image.Greeter/SayHello',
                 request_serializer=image_dot_test__pb2.HelloRequest.SerializeToString,
                 response_deserializer=image_dot_test__pb2.HelloReply.FromString,
@@ -24,7 +24,7 @@ class GreeterStub(object):
 class GreeterServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def SayHello(self, request, context):
+    def SayHello(self, request_iterator, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -33,7 +33,7 @@ class GreeterServicer(object):
 
 def add_GreeterServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'SayHello': grpc.unary_unary_rpc_method_handler(
+            'SayHello': grpc.stream_unary_rpc_method_handler(
                     servicer.SayHello,
                     request_deserializer=image_dot_test__pb2.HelloRequest.FromString,
                     response_serializer=image_dot_test__pb2.HelloReply.SerializeToString,
@@ -49,7 +49,7 @@ class Greeter(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def SayHello(request,
+    def SayHello(request_iterator,
             target,
             options=(),
             channel_credentials=None,
@@ -59,7 +59,7 @@ class Greeter(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/image.Greeter/SayHello',
+        return grpc.experimental.stream_unary(request_iterator, target, '/image.Greeter/SayHello',
             image_dot_test__pb2.HelloRequest.SerializeToString,
             image_dot_test__pb2.HelloReply.FromString,
             options, channel_credentials,

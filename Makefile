@@ -1,5 +1,5 @@
 app:
-	docker-compose --verbose -f deployments/docker-compose.yml up -d --build api ingress minio kafka
+	docker-compose --verbose -f deployments/docker-compose.yml up -d --build api ingress minio kafka model
 
 api_cont:
 	docker-compose --verbose -f deployments/docker-compose.yml up -d --build api
@@ -9,6 +9,9 @@ ingress_cont:
 
 mysql_cont:
 	docker-compose --verbose -f deployments/docker-compose.yml up -d mysql
+
+model_cont:
+	docker-compose --verbose -f deployments/docker-compose.yml up -d model
 
 kafka_cont:
 	docker-compose --verbose -f deployments/docker-compose.yml up -d kafka

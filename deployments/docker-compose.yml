@@ -12,6 +12,30 @@ services:
     environment:
       - env=local
     restart: on-failure
+    depends_on:
+      - minio
+      - mysql
+      - kafka
+      - ingress
+
+  model:
+    build:
+      context: ../
+      dockerfile: ./deployments/model/Dockerfile
+    image: zelawat27/test_model
+    hostname: model
+    expose:
+      - "8090"
+    networks:
+      - api_net
+    environment:
+      - env=local
+    restart: on-failure
+    depends_on:
+      - minio
+      - mysql
+      - kafka
+      - ingress
 
   ingress:
     build:
@@ -26,6 +50,10 @@ services:
     environment:
       - env=local
     restart: on-failure
+    depends_on:
+      - minio
+      - mysql
+      - kafka
 
   mysql:
     hostname: mysql

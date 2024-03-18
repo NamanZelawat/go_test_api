@@ -16,13 +16,18 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
+var (
+	conn *grpc.ClientConn
+	err  error
+)
+
 func init() {
 	// Create a client connection to the gRPC server we just started
 	// This is where the gRPC-Gateway proxies the requests
 	gwmux := runtime.NewServeMux()
 
 	log.Println("Starting to establish the grpc conn")
-	conn, err := grpc.Dial(
+	conn, err = grpc.Dial(
 		"ingress:8080",
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
@@ -62,58 +67,63 @@ func serverThread(gwServer *http.Server, wg *sync.WaitGroup) {
 }
 
 func reqRegister(conn *grpc.ClientConn, gwmux *runtime.ServeMux) {
-	handleFileUpload := func(w http.ResponseWriter, r *http.Request, params map[string]string) {
-		log.Println("Calling the function")
+	gwmux.HandlePath("POST", "/image", handleFileUpload)
+	gwmux.HandlePath("GET", "/image", handleGet)
+}
 
-		f, _, err := r.FormFile("file")
+func handleFileUpload(w http.ResponseWriter, r *http.Request, params map[string]string) {
+	log.Println("Calling the function")
+
+	f, _, err := r.FormFile("file")
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to get file: %s", err.Error()), http.StatusBadRequest)
+		return
+	}
+	defer f.Close()
+
+	buff := make([]byte, 512)
+
+	filetype := http.DetectContentType(buff)
+
+	c := pb.NewGreeterClient(conn)
+
+	// Contact the server and print out its response.
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+
+	stream, err := c.SayHello(ctx)
+
+	for {
+		bytesRead, err := f.Read(buff)
+		if err == io.EOF {
+			break
+		}
 		if err != nil {
-			http.Error(w, fmt.Sprintf("failed to get file: %s", err.Error()), http.StatusBadRequest)
-			return
-		}
-		defer f.Close()
-
-		buff := make([]byte, 512)
-
-		filetype := http.DetectContentType(buff)
-
-		c := pb.NewGreeterClient(conn)
-
-		// Contact the server and print out its response.
-		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-		defer cancel()
-
-		stream, err := c.SayHello(ctx)
-
-		for {
-			bytesRead, err := f.Read(buff)
-			if err == io.EOF {
-				break
-			}
-			if err != nil {
-				log.Fatalf("error reading chunk from file: %v", err)
-			}
-
-			// Send the chunk to the server
-			err = stream.Send(&pb.HelloRequest{InputField: buff[:bytesRead]})
-			if err != nil {
-				log.Fatalf("error sending chunk to server: %v", err)
-			}
+			log.Fatalf("error reading chunk from file: %v", err)
 		}
 
-		resp, err := stream.CloseAndRecv()
+		// Send the chunk to the server
+		err = stream.Send(&pb.HelloRequest{InputField: buff[:bytesRead]})
 		if err != nil {
-			log.Fatalf("could not greet: %v", err)
+			log.Fatalf("error sending chunk to server: %v", err)
 		}
-		log.Printf("Greeting: %s", resp.GetMessage())
-
-		fmt.Println(filetype)
-
-		httpResp, err := json.Marshal(resp)
-		if err != nil {
-			log.Printf("Error, : %v", err)
-		}
-		w.Write(httpResp)
 	}
 
-	gwmux.HandlePath("POST", "/image", handleFileUpload)
+	resp, err := stream.CloseAndRecv()
+	if err != nil {
+		log.Fatalf("could not greet: %v", err)
+	}
+	log.Printf("Greeting: %s", resp.GetMessage())
+
+	fmt.Println(filetype)
+
+	httpResp, err := json.Marshal(resp)
+	if err != nil {
+		log.Printf("Error, : %v", err)
+	}
+	w.Write(httpResp)
+}
+
+func handleGet(w http.ResponseWriter, r *http.Request, params map[string]string) {
+	w.Write([]byte("Hello brother!!"))
 }

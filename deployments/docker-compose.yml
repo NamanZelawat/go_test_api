@@ -12,6 +12,7 @@ services:
     environment:
       - env=local
     restart: on-failure
+
   ingress:
     build:
       context: ../
@@ -25,6 +26,7 @@ services:
     environment:
       - env=local
     restart: on-failure
+
   mysql:
     hostname: mysql
     image: mysql
@@ -39,6 +41,7 @@ services:
       - ./volumes/mysql/data:/var/lib/mysql
     networks:
       - api_net
+
   minio:
     hostname: minio
     image: bitnami/minio:latest
@@ -53,5 +56,33 @@ services:
       - ./volumes/minio/data:/bitnami/minio/data
     networks:
       - api_net
+
+  zookeeper:
+    hostname: zookeeper
+    image: docker.io/bitnami/zookeeper:3.9
+    ports:
+      - "2181:2181"
+    volumes:
+      - "./volumes/zookeeper:/bitnami"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - api_net
+
+  kafka:
+    hostname: kafka
+    image: docker.io/bitnami/kafka:3.4
+    ports:
+      - "9092:9092"
+    volumes:
+      - "./volumes/kafka:/bitnami"
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+    depends_on:
+      - zookeeper
+    networks:
+      - api_net
+
 networks:
   api_net:

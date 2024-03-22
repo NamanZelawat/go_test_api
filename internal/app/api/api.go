@@ -81,7 +81,11 @@ func handleFileUpload(w http.ResponseWriter, r *http.Request, params map[string]
 	}
 	defer f.Close()
 
+	log.Println("Making buffer")
+
 	buff := make([]byte, 512)
+
+	log.Println("Detecting file type")
 
 	filetype := http.DetectContentType(buff)
 

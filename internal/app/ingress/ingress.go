@@ -8,6 +8,7 @@ import (
 )
 
 func init() {
+	log.Println("Ingress is starting....")
 	lis, err := net.Listen("tcp", ":8080")
 	if err != nil {
 		log.Fatalln("Failed to listen:", err)

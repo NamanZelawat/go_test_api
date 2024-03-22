@@ -1,4 +1,4 @@
-FROM golang
+FROM golang:alpine as build
 
 WORKDIR /app
 
@@ -6,4 +6,10 @@ COPY . .
 
 RUN go mod tidy
 
-CMD ["go", "run", "cmd/api/main.go"]
+RUN go build -o main cmd/api/main.go
+
+FROM alpine:latest as final
+
+COPY --from=build /app/main .
+
+CMD ["./main"]

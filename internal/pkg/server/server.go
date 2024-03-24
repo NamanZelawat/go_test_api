@@ -5,12 +5,11 @@ import (
 	"io"
 	"log"
 	"os"
-	"time"
 
 	pb "github.com/NamanZelawat/go_test_api/proto/image"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
-	kafka "github.com/segmentio/kafka-go"
+	"github.com/nats-io/nats.go"
 	"google.golang.org/grpc"
 )
 
@@ -35,9 +34,12 @@ func (s *server) SayHello(stream pb.Greeter_SayHelloServer) error {
 	// filetype := http.DetectContentType(in.InputField)
 	// fmt.Println(filetype)
 
+	minioURL := os.Getenv("MINIO_URL")
+	messageURL := os.Getenv("MESSAGE_URL")
+
 	fo, err := os.Create("output.png")
 	if err != nil {
-		panic(err)
+		log.Println("Error creating file", err)
 	}
 	// close fo on exit and check for its returned error
 	defer func() {
@@ -58,7 +60,7 @@ func (s *server) SayHello(stream pb.Greeter_SayHelloServer) error {
 		}
 	}
 
-	s3Client, err := minio.New("minio:9000", &minio.Options{
+	s3Client, err := minio.New(minioURL, &minio.Options{
 		Creds:  credentials.NewStaticV4("root", "password", ""),
 		Secure: false,
 	})
@@ -73,29 +75,16 @@ func (s *server) SayHello(stream pb.Greeter_SayHelloServer) error {
 	}
 	log.Println("Successfully uploaded image")
 
-	// to produce messages
-	topic := "my-topic"
-	partition := 0
-
-	conn, err := kafka.DialLeader(context.Background(), "tcp", "kafka:9092", topic, partition)
+	nc, err := nats.Connect(messageURL)
 	if err != nil {
-		log.Fatal("failed to dial leader:", err)
+		log.Fatal(err)
 	}
+	defer nc.Close()
 
-	conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
-	_, err = conn.WriteMessages(
-		kafka.Message{Value: []byte("one!")},
-		kafka.Message{Value: []byte("two!")},
-		kafka.Message{Value: []byte("three!")},
-	)
-	if err != nil {
-		log.Fatal("failed to write messages:", err)
-	}
-
-	if err := conn.Close(); err != nil {
-		log.Fatal("failed to close writer:", err)
-	}
-
-	log.Println("Successfully sent message")
+	// Simple Publisher
+	subject := "example"
+	msg := []byte("Hello NATS!")
+	nc.Publish(subject, msg)
+	log.Printf("Published message: %s\n", msg)
 	return nil
 }

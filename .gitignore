@@ -1,7 +1,5 @@
 deployments/volumes/mysql/data
 deployments/volumes/minio/data
-deployments/volumes/zookeeper
-deployments/volumes/kafka
 vendor
 .venv
 *.pyc

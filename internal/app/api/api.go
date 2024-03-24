@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"sync"
 	"time"
 
@@ -26,15 +27,20 @@ func init() {
 	// This is where the gRPC-Gateway proxies the requests
 	gwmux := runtime.NewServeMux()
 
+	ingressURL := os.Getenv("INGRESS_URL")
+
 	log.Println("Starting to establish the grpc conn")
 	conn, err = grpc.Dial(
-		"ingress:8080",
+		ingressURL,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
+	if err != nil {
+
+	}
 
 	defer conn.Close()
 
-	log.Println("Dialing done")
+	log.Println("Dialing done", err)
 	if err != nil {
 		log.Println("Failed to dial server:", err)
 	}
@@ -50,7 +56,7 @@ func init() {
 		Handler: gwmux,
 	}
 
-	reqRegister(conn, gwmux)
+	reqRegister(gwmux)
 
 	log.Println("Serving gRPC-Gateway on http://0.0.0.0:8090")
 	var wg sync.WaitGroup
@@ -66,7 +72,7 @@ func serverThread(gwServer *http.Server, wg *sync.WaitGroup) {
 	defer wg.Done()
 }
 
-func reqRegister(conn *grpc.ClientConn, gwmux *runtime.ServeMux) {
+func reqRegister(gwmux *runtime.ServeMux) {
 	gwmux.HandlePath("POST", "/image", handleFileUpload)
 	gwmux.HandlePath("GET", "/image", handleGet)
 }
@@ -89,13 +95,20 @@ func handleFileUpload(w http.ResponseWriter, r *http.Request, params map[string]
 
 	filetype := http.DetectContentType(buff)
 
+	log.Println("Done 1")
+
 	c := pb.NewGreeterClient(conn)
+
+	log.Println("Done 2")
 
 	// Contact the server and print out its response.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
 	stream, err := c.SayHello(ctx)
+	if err != nil {
+		log.Println("Error in say hello", err)
+	}
 
 	for {
 		bytesRead, err := f.Read(buff)

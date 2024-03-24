@@ -1,28 +1,29 @@
 import sys
-from kafka import KafkaConsumer
+import asyncio
+import nats
+
+
+async def message_handler(msg):
+    subject = msg.subject
+    data = msg.data.decode()
+    print(f"Received a message on '{subject}': {data}")
+    sys.stdout.flush()
+
+
+async def run_message():
+    print(f"Trying to connect to the NATS")
+    sys.stdout.flush()
+    nc = await nats.connect(servers=["nats://message:4222"])
+
+    await nc.subscribe("example", cb=message_handler)
+
+    # Keep the connection open indefinitely
+    await nc.flush()
 
 
 def run():
     print("Running the consumer")
     sys.stdout.flush()
-    # Define Kafka broker address and topic
-    bootstrap_servers = 'kafka:9092'
-    topic = 'my-topic'
-
-    # Create Kafka consumer
-    consumer = KafkaConsumer(topic,
-                            bootstrap_servers=bootstrap_servers,
-                            auto_offset_reset='earliest',
-                            enable_auto_commit=True,
-                            group_id='my-group')
-
-    # Start consuming messages
-    try:
-        for message in consumer:
-            print(f"Received message: {message.value.decode('utf-8')}")
-            sys.stdout.flush()
-    except KeyboardInterrupt:
-        print("Consumer stopped")
-        sys.stdout.flush()
-    finally:
-        consumer.close()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(run_message())
+    loop.run_forever()

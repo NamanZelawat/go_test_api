@@ -11,11 +11,12 @@ services:
       - api_net
     environment:
       - env=local
+      - INGRESS_URL=ingress:8080
     restart: on-failure
     depends_on:
       - minio
       - mysql
-      - kafka
+      - message
       - ingress
 
   model:
@@ -34,7 +35,7 @@ services:
     depends_on:
       - minio
       - mysql
-      - kafka
+      - message
       - ingress
 
   ingress:
@@ -49,11 +50,13 @@ services:
       - "8080"
     environment:
       - env=local
+      - MINIO_URL=minio:9000
+      - MESSAGE_URL=message:4222
     restart: on-failure
     depends_on:
       - minio
       - mysql
-      - kafka
+      - message
 
   mysql:
     hostname: mysql
@@ -85,30 +88,12 @@ services:
     networks:
       - api_net
 
-  zookeeper:
-    hostname: zookeeper
-    image: docker.io/bitnami/zookeeper:3.9
+  message:
+    hostname: message
+    image: nats-streaming:linux
     ports:
-      - "2181:2181"
-    volumes:
-      - "./volumes/zookeeper:/bitnami"
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-    networks:
-      - api_net
-
-  kafka:
-    hostname: kafka
-    image: docker.io/bitnami/kafka:3.4
-    ports:
-      - "9092:9092"
-    volumes:
-      - "./volumes/kafka:/bitnami"
-    environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
-    depends_on:
-      - zookeeper
+      - "4223:4223"
+      - "8223:8223"
     networks:
       - api_net
 

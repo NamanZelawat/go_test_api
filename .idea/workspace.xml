@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d4c903-bf62-4b2e-a1f4-ef24b6356c6c" name="Changes" comment="Readme.">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/deployments/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/deployments/model/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/model/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/api/api.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/app/model/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/model/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/pkg/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

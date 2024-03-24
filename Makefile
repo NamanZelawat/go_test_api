@@ -1,5 +1,5 @@
 app:
-	docker-compose --verbose -f deployments/docker-compose.yml up -d --build api ingress minio kafka model
+	docker-compose --verbose -f deployments/docker-compose.yml up -d --build api ingress minio model message
 
 api_cont:
 	docker-compose --verbose -f deployments/docker-compose.yml up -d --build api
@@ -13,14 +13,14 @@ mysql_cont:
 model_cont:
 	docker-compose --verbose -f deployments/docker-compose.yml up -d model
 
-kafka_cont:
-	docker-compose --verbose -f deployments/docker-compose.yml up -d kafka
+message_cont:
+	docker-compose --verbose -f deployments/docker-compose.yml up -d message
 
 build_images:
-	docker-compose --verbose -f deployments/docker-compose.yml build
+	docker-compose --verbose -f deployments/docker-compose.yml build api ingress
 
 push_images:
-	docker-compose --verbose -f deployments/docker-compose.yml push
+	docker-compose --verbose -f deployments/docker-compose.yml push api ingress
 
 proto_files:
 	buf generate

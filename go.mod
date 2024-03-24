@@ -6,7 +6,7 @@ require (
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
 	github.com/minio/minio-go/v7 v7.0.67
-	github.com/segmentio/kafka-go v0.4.47
+	github.com/nats-io/nats.go v1.34.0
 	google.golang.org/grpc v1.61.0
 	google.golang.org/protobuf v1.32.0
 )
@@ -22,9 +22,11 @@ require (
 	github.com/minio/sha256-simd v1.0.1 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/pierrec/lz4/v4 v4.1.15 // indirect
+	github.com/nats-io/nkeys v0.4.7 // indirect
+	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/rs/xid v1.5.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
+	github.com/stretchr/testify v1.8.0 // indirect
 	golang.org/x/crypto v0.18.0 // indirect
 	golang.org/x/net v0.20.0 // indirect
 	golang.org/x/sys v0.16.0 // indirect
